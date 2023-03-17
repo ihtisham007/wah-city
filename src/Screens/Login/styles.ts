@@ -10,6 +10,7 @@ import colors from '../../styles/colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'space-between',
   },
   imgStyle: {
     height: moderateScale(200),
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
   },
   mainStyles: {
     paddingHorizontal: moderateScale(24),
-    paddingVertical: moderateScale(44),
+    paddingTop: moderateScale(44),
   },
   forgotView: {
     alignSelf: 'flex-end',
@@ -38,6 +39,13 @@ const styles = StyleSheet.create({
     color: colors.themeColor,
     fontSize: scale(16),
     fontWeight: '600',
+  },
+  bottomView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: moderateVerticalScale(72),
+    justifyContent: 'center',
+    marginBottom: moderateVerticalScale(44),
   },
 });
 
