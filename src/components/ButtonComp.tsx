@@ -20,7 +20,7 @@ const ButtonComp = ({btnText, buttonStyles = {}, onPress = () => {}}) => {
 const styles = StyleSheet.create({
   buttonStyles: {
     height: moderateScale(48),
-    color: colors.themeColor,
+    backgroundColor: colors.themeColor,
     borderRadius: moderateScale(4),
     justifyContent: 'center',
     alignItems: 'center',
