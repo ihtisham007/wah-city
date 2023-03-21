@@ -8,6 +8,7 @@ import {
   ChooseAccount,
   Home,
   SetPassword,
+  VistingPlaces,
 } from '../Screens';
 
 const Stack = createNativeStackNavigator();
@@ -29,6 +30,10 @@ export default function AuthStack() {
       <Stack.Screen
         name={navigationString.RESET_PASSWORD}
         component={SetPassword}
+      />
+      <Stack.Screen
+        name={navigationString.VISITING_PLACE}
+        component={VistingPlaces}
       />
     </Stack.Navigator>
   );
