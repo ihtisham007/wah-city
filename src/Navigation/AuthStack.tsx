@@ -6,11 +6,11 @@ import {
   Register,
   ForgotPassword,
   ChooseAccount,
-  Home,
   SetPassword,
-  VistingPlaces,
+  Home,
+  //VistingPlaces,
 } from '../Screens';
-
+import VisitingPlaces from '../Screens/VisitingPlaces/VisitingPlaces';
 const Stack = createNativeStackNavigator();
 
 export default function AuthStack() {
@@ -33,7 +33,7 @@ export default function AuthStack() {
       />
       <Stack.Screen
         name={navigationString.VISITING_PLACE}
-        component={VistingPlaces}
+        component={VisitingPlaces}
       />
     </Stack.Navigator>
   );

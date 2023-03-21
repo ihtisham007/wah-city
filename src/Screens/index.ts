@@ -1,5 +1,3 @@
-import { formToJSON } from 'axios';
-
 //Auth Stack Screens
 export {default as Register} from './Register/Register';
 export {default as Login} from './Login/Login';
@@ -9,4 +7,4 @@ export {default as SetPassword} from './SetPassword/SetPassword';
 
 //Main Stack Screens
 export {default as Home} from './Home/Home';
-export {default as VistingPlaces} from './VisitingPlaces/VisitingPlaces';
+//export {default as VisitingPlaces} from './VisitingPlaces/VisitingPlaces';
