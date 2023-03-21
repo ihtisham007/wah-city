@@ -18,6 +18,9 @@ import ButtonComp from '../../components/ButtonComp';
 // create a component
 const Login = ({navigation}) => {
   const [isVisible, setVisible] = useState(true);
+  const openSignUpPage = () => {
+    navigation.navigate(navigationString.VISITING_PLACE);
+  };
   return (
     <View style={styles.container}>
       <View>
@@ -49,8 +52,7 @@ const Login = ({navigation}) => {
         </View>
         <View style={styles.bottomView}>
           <Text style={{color: 'red'}}>Not a member ?</Text>
-          <TouchableOpacity
-            onPress={navigation.navigate(navigationString.VISITING_PLACE)}>
+          <TouchableOpacity onPress={openSignUpPage}>
             <Text>Join now</Text>
           </TouchableOpacity>
         </View>

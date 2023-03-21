@@ -7,16 +7,21 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import imagePath from '../../constants/imagePath';
+import navigationString from '../../constants/navigationString';
 import colors from '../../styles/colors';
 import styles from './styles';
 
 // create a component
-const VisitingPlaces = () => {
+const VisitingPlaces = ({navigation}) => {
   const [bgColor, setBGColor] = useState('balack');
   const changeColoronClick = () => {
     setBGColor(colors.orange);
+  };
+  const openScreen = () => {
+    navigation.navigate(navigationString.HOME);
   };
   return (
     <View style={styles.container}>
@@ -47,10 +52,12 @@ const VisitingPlaces = () => {
             </Text>
           </View>
           <View style={styles.viewImage}>
-            <Image
-              source={imagePath.visitingPlace_1}
-              style={styles.viewImages}
-            />
+            <TouchableOpacity onPress={openScreen}>
+              <Image
+                source={imagePath.visitingPlace_1}
+                style={styles.viewImages}
+              />
+            </TouchableOpacity>
             <Image
               source={imagePath.visitingPlace_2}
               style={styles.viewImages}
