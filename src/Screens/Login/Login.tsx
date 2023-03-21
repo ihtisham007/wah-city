@@ -48,11 +48,10 @@ const Login = ({navigation}) => {
           <ButtonComp btnText={'Login'} />
         </View>
         <View style={styles.bottomView}>
-          <Text>Not a member ?</Text>
-          <TouchableOpacity>
-            <Text onPress={navigation.navigate(navigationString.REGISTER)}>
-              Join now
-            </Text>
+          <Text style={{color: 'red'}}>Not a member ?</Text>
+          <TouchableOpacity
+            onPress={navigation.navigate(navigationString.VISITING_PLACE)}>
+            <Text>Join now</Text>
           </TouchableOpacity>
         </View>
       </View>
