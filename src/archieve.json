@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "city": "Wah Cantt",
+        "placeName": "Wah Mediacal College",
+        "placeType": "city Hospital",
+        "pic": "http://wahcity.com/images/visitingplaces/medium/1673597723158434609463c1131bbfc6b.jpg"
+    },
+    {
+        "id": 2,
+        "city": "Wah Cantt",
+        "placeName": "Aslam Market",
+        "placeType": "Market",
+        "pic": "https://wahcity.com/pages/visitingplace/aslam-market"
+    },
+    {
+        "id": 3,
+        "city": "Wah Cantt",
+        "placeName": "SherShah Park",
+        "placeType": "National Park",
+        "pic": "https://wahcity.com/pages/visitingplace/sher-shah-park"
+    }
+]

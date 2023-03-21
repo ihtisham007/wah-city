@@ -1,14 +1,27 @@
 //import liraries
+import {useNavigation} from '@react-navigation/native';
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {moderateScale} from 'react-native-size-matters';
 import imagePath from '../constants/imagePath';
 
 // create a component
-const HeaderComp = () => {
+const HeaderComp = ({onPressBack}) => {
+  const navigation = useNavigation();
+  const goBack = () => {
+    navigation.goBack();
+  };
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
-        <Image source={imagePath.showEye} />
+      <TouchableOpacity onPress={!!onPressBack ? onPressBack : () => goBack()}>
+        <View style={{flexDirection: 'row'}}>
+          <View>
+            <Text style={styles.textLogo}>Wah</Text>
+          </View>
+          <View>
+            <Text>City</Text>
+          </View>
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -17,10 +30,18 @@ const HeaderComp = () => {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#2c3e50',
+    height: moderateScale(42),
+  },
+  textLogo: {
+    fontSize: moderateScale(20),
+    fontWeight: '600',
+    textTransform: 'uppercase',
+    letterSpacing: moderateScale(1),
+    lineHeight: moderateScale(40),
+    fontFamily: 'Aquire',
+    color: '#2b2320',
   },
 });
 

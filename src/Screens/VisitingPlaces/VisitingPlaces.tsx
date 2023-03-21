@@ -7,8 +7,9 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  ImageBackground,
+  SafeAreaView,
 } from 'react-native';
+import HeaderComp from '../../components/HeaderComp';
 import imagePath from '../../constants/imagePath';
 import navigationString from '../../constants/navigationString';
 import colors from '../../styles/colors';
@@ -27,6 +28,9 @@ const VisitingPlaces = ({navigation}) => {
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.mainStyles}>
+          <SafeAreaView>
+            <HeaderComp />
+          </SafeAreaView>
           <Text style={styles.textMain}>Visiting Places in the City</Text>
 
           <View style={styles.topViewInput}>
