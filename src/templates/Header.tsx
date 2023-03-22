@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import tw from 'twrnc';
-
+import {Aquire} from './../styles/fonts/Aquire-BW0ox.otf';
 type HeaderProps = {
   title: string;
 };
@@ -25,6 +25,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff',
+    fontFamily: Aquire,
   },
 });

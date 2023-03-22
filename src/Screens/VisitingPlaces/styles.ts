@@ -48,6 +48,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: moderateScale(15),
   },
+  backImages: {
+    paddingHorizontal: moderateScale(30),
+    paddingVertical: moderateScale(5),
+    backgroundColor: 'white',
+    opacity: 0.8,
+    borderRadius: moderateScale(20),
+    alignItems: 'center',
+    alignContent: 'center',
+  },
   viewImage: {
     marginTop: moderateVerticalScale(50),
   },

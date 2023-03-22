@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import imagePath from '../constants/imagePath';
+import {Aqure} from './../styles/fonts/Aquire-BW0ox.otf';
 
 // create a component
 const HeaderComp = ({onPressBack}) => {
@@ -19,7 +20,7 @@ const HeaderComp = ({onPressBack}) => {
             <Text style={styles.textLogo}>Wah</Text>
           </View>
           <View>
-            <Text>City</Text>
+            <Text style={styles.textLogo}>City</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: moderateScale(1),
     lineHeight: moderateScale(40),
-    fontFamily: 'Aquire',
+    fontFamily: Aqure,
     color: '#2b2320',
   },
 });
