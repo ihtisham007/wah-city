@@ -66,14 +66,14 @@ const VisitingPlaces = ({navigation}) => {
                 <TouchableOpacity onPress={openScreen}>
                   <ImageBackground
                     source={{uri: ele.pic}}
-                    style={styles.viewImages}>
-                    <View
-                      // eslint-disable-next-line react-native/no-inline-styles
-                      style={styles.backImages}>
-                      <Text>{ele.placeName}</Text>
-                      <Text>{ele.city}</Text>
-                    </View>
-                  </ImageBackground>
+                    style={styles.viewImages}
+                  />
+                  <View
+                    // eslint-disable-next-line react-native/no-inline-styles
+                    style={styles.backImages}>
+                    <Text>{ele.name}</Text>
+                    <Text>{ele.uIdentifier}</Text>
+                  </View>
                 </TouchableOpacity>
               );
             })}

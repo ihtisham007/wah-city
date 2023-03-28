@@ -1,22 +1,25 @@
 [
     {
-        "id": 1,
-        "city": "Wah Cantt",
-        "placeName": "Wah Mediacal College",
+        "visitingPlaceCategoryID": 1,
+        "visitingPlaceID": 1,
+        "name": "Wah Mediacal College",
+        "uIdentifier": "Wah-Medical-College Wah Cantt",
         "placeType": "city Hospital",
-        "pic": "http://wahcity.com/images/visitingplaces/medium/1673597723158434609463c1131bbfc6b.jpg",
+        "pic": "http://wahcity.com/images/visitingplaces/medium/1673597723158434609463c1131bbfc6b.jpg"
     },
     {
-        "id": 2,
-        "city": "Wah Cantt",
-        "placeName": "Aslam Market",
+        "visitingPlaceCategoryID": 2,
+        "visitingPlaceID": 2,
+        "name": "Aslam Market",
+        "uIdentifier": "Aslam-Market Wah Cantt",
         "placeType": "Market",
         "pic": "http://wahcity.com/images/visitingplaces/original/1673933837198398909863c6340d07d4f.jpg"
     },
     {
-        "id": 3,
-        "city": "Wah Cantt",
-        "placeName": "SherShah Park",
+        "visitingPlaceCategoryID": 3,
+        "visitingPlaceID": 3,
+        "name": "SherShah Park",
+        "uIdentifier": "SherShah-Park Wah Cantt",
         "placeType": "National Park",
         "pic": "http://wahcity.com/images/visitingplaces/fullsize/1673934211146713435963c6358347c27.jpg"
     }

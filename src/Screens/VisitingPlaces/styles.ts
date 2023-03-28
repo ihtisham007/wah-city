@@ -52,10 +52,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: moderateScale(30),
     paddingVertical: moderateScale(5),
     backgroundColor: 'white',
-    opacity: 0.8,
+    opacity: 0.7,
     borderRadius: moderateScale(20),
     alignItems: 'center',
     alignContent: 'center',
+    color: 'rgba(255,255,255,1)',
   },
   viewImage: {
     marginTop: moderateVerticalScale(50),
@@ -63,9 +64,10 @@ const styles = StyleSheet.create({
   viewImages: {
     width: '100%',
     height: moderateScale(200),
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     marginBottom: moderateScale(10),
+    borderRadius: moderateScale(20),
   },
 });
 
