@@ -8,6 +8,7 @@ import {
   ChooseAccount,
   SetPassword,
   Home,
+  FirstStep,
   //VistingPlaces,
 } from '../Screens';
 import VisitingPlaces from '../Screens/VisitingPlaces/VisitingPlaces';
@@ -35,6 +36,7 @@ export default function AuthStack() {
         name={navigationString.VISITING_PLACE}
         component={VisitingPlaces}
       />
+      <Stack.Screen name={navigationString.FIRST_STEP} component={FirstStep} />
     </Stack.Navigator>
   );
 }

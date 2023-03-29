@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
     paddingVertical: moderateScale(5),
     backgroundColor: 'white',
     opacity: 0.7,
-    borderRadius: moderateScale(20),
     alignItems: 'center',
     alignContent: 'center',
     color: 'rgba(255,255,255,1)',
@@ -66,7 +65,6 @@ const styles = StyleSheet.create({
     height: moderateScale(200),
     justifyContent: 'flex-end',
     alignItems: 'center',
-    marginBottom: moderateScale(10),
     borderRadius: moderateScale(20),
   },
 });

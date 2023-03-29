@@ -6,4 +6,5 @@ export default {
   RESET_PASSWORD: 'ResetPassword',
   CHOOSE_ACCOUNT: 'ChooseAccount',
   VISITING_PLACE: 'VisitingPlaces',
+  FIRST_STEP: 'FirstStep',
 };

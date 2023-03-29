@@ -17,6 +17,8 @@ import colors from '../../styles/colors';
 import styles from './styles';
 import axios from 'axios';
 import {moderateScale} from 'react-native-size-matters';
+import DropDownPicker from 'react-native-dropdown-picker';
+
 const archieveData = require('./../../archieve.json');
 // create a component
 const VisitingPlaces = ({navigation}) => {
@@ -29,12 +31,26 @@ const VisitingPlaces = ({navigation}) => {
   const openScreen = () => {
     navigation.navigate(navigationString.HOME);
   };
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    {label: 'Apple', value: 'apple'},
+    {label: 'Banana', value: 'banana'},
+  ]);
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.mainStyles}>
           <SafeAreaView>
             <HeaderComp />
+            <DropDownPicker
+              open={open}
+              value={value}
+              items={items}
+              setOpen={setOpen}
+              setValue={setValue}
+              setItems={setItems}
+            />
           </SafeAreaView>
           <Text style={styles.textMain}>Visiting Places in the City</Text>
 

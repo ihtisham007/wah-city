@@ -7,4 +7,5 @@ export {default as SetPassword} from './SetPassword/SetPassword';
 
 //Main Stack Screens
 export {default as Home} from './Home/Home';
-//export {default as VisitingPlaces} from './VisitingPlaces/VisitingPlaces';
+export {default as VisitingPlaces} from './VisitingPlaces/VisitingPlaces';
+export {default as FirstStep} from './VisitingPlaces/FirstStep';
