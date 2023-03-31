@@ -27,7 +27,7 @@ const Dropdown = ({
         autoScroll
         placeholder={placeholder}
         zIndex={9999}
-        style={{marginTop: isOpen ? 175 : 20}}
+        style={style}
       />
     </View>
   );

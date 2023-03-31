@@ -4,6 +4,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import {moderateScale} from 'react-native-size-matters';
 import ButtonComp from '../../components/ButtonComp';
 import Dropdown from '../../components/DropDown';
+import Routes from '../../Navigation/Routes';
 
 const FirstStep = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,9 +41,7 @@ const FirstStep = () => {
         }));
         setStates(stateItems);
       })
-      .catch(error => {
-        console.error(error);
-      });
+      .catch(error => {});
   }, [currentValue]);
 
   useEffect(() => {
@@ -55,9 +54,7 @@ const FirstStep = () => {
         }));
         setCity(cityItems);
       })
-      .catch(error => {
-        console.error(error);
-      });
+      .catch(error => {});
   }, [cityValue]);
 
   return (

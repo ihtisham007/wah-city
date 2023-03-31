@@ -4,6 +4,11 @@ import {createStore} from 'redux';
 const initialState = {
   count: 0,
   userInput: '',
+  worldData: [],
+  state: [],
+  city: [],
+  valueID: '',
+  type: '',
 };
 
 export const setUserInput = (userText: String) => ({
@@ -25,6 +30,8 @@ function reducer(
       return {...state, userInput: action.payload};
     case 'none':
       return {...state, userInput: (state.userInput = 'hello world!!!')};
+    case 'SET_TYPE':
+      return {...state, worldData: action.payload};
     default:
       return state;
   }

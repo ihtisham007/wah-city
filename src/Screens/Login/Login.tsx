@@ -19,7 +19,7 @@ import ButtonComp from '../../components/ButtonComp';
 const Login = ({navigation}) => {
   const [isVisible, setVisible] = useState(true);
   const openSignUpPage = () => {
-    navigation.navigate(navigationString.FIRST_STEP);
+    navigation.navigate(navigationString.FIRST_STEP, {country_value: 1});
   };
   return (
     <View style={styles.container}>
