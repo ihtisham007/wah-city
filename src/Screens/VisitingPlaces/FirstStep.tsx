@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import DropDownPicker from 'react-native-dropdown-picker';
 import {moderateScale} from 'react-native-size-matters';
 import ButtonComp from '../../components/ButtonComp';
 import Dropdown from '../../components/DropDown';
-import Routes from '../../Navigation/Routes';
+import navigationString from '../../constants/navigationString';
+import store from '../../store';
 
-const FirstStep = () => {
+const FirstStep = ({navigation}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isStateOpen, setIsStateOpen] = useState(false);
   const [currentValue, setCurrentValue] = useState('');
@@ -14,7 +14,8 @@ const FirstStep = () => {
   const [cityValue, setCityValue] = useState('');
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
-  const [cities, setCity] = useState([]);
+  const [cities, setCities] = useState([]);
+
   useEffect(() => {
     fetch('https://wahcity.com/api/v1/countries')
       .then(response => response.json())
@@ -25,6 +26,7 @@ const FirstStep = () => {
           },
         );
         setCountries(countryItems);
+        store.dispatch({type: 'SET_WORLD_DATA', payload: countryItems});
       })
       .catch(error => {
         console.error(error);
@@ -40,23 +42,29 @@ const FirstStep = () => {
           value: state.stateid,
         }));
         setStates(stateItems);
+        store.dispatch({type: 'SET_WORLD_DATA', payload: stateItems});
       })
       .catch(error => {});
   }, [currentValue]);
 
   useEffect(() => {
-    fetch(`https://wahcity.com/api/v1/cities/${cityValue}`)
+    fetch(`https://wahcity.com/api/v1/cities/${stateValue}`)
       .then(response => response.json())
       .then(data => {
-        const cityItems = data.map(state => ({
-          label: state.cityname,
-          value: state.cityid,
+        const cityItems = data.map(city => ({
+          label: city.cityname,
+          value: city.cityid,
         }));
-        setCity(cityItems);
+        setCities(cityItems);
+        store.dispatch({type: 'SET_WORLD_DATA', payload: cityItems});
       })
       .catch(error => {});
-  }, [cityValue]);
+  }, [stateValue]);
 
+  const handleSubmit = () => {
+    navigation.navigate(navigationString.VISITING_PLACE);
+  };
+  const worldData = store.getState().worldData;
   return (
     <View style={styles.container}>
       <Dropdown
@@ -65,6 +73,7 @@ const FirstStep = () => {
         value={currentValue}
         setValue={setCurrentValue}
         placeholder="Countries"
+        style={{marginTop: isOpen ? 200 : 20}}
       />
       <Dropdown
         label="Select a State"
@@ -78,12 +87,19 @@ const FirstStep = () => {
         label="Select a city"
         items={cities}
         value={cityValue}
-        setValue={setCity}
+        setValue={setCityValue}
         placeholder="Cities"
         style={{marginTop: isOpen ? 100 : 20}}
       />
       <View>
-        <ButtonComp btnText="Submit" buttonStyles={styles.btnGo} />
+        <ButtonComp
+          btnText="Submit"
+          buttonStyles={styles.btnGo}
+          onPress={handleSubmit}
+        />
+        {worldData.map((item, index) => (
+          <Text key={index}>{item.label}</Text>
+        ))}
       </View>
     </View>
   );

@@ -17,13 +17,16 @@ import colors from '../../styles/colors';
 import styles from './styles';
 import axios from 'axios';
 import {moderateScale} from 'react-native-size-matters';
-import DropDownPicker from 'react-native-dropdown-picker';
+import store from '../../store';
+import Dropdown from '../../components/DropDown';
 
 const archieveData = require('./../../archieve.json');
 // create a component
 const VisitingPlaces = ({navigation}) => {
+  const [isOpen, setIsOpen] = useState(false);
   const [bgColor, setBGColor] = useState('rgb(0,0,0)');
   const [jsonData, setJsonData] = useState([]);
+  const [currentValue, setCurrentValue] = useState('');
   console.table(archieveData);
   const changeColoronClick = () => {
     setBGColor(colors.orange);
@@ -31,25 +34,23 @@ const VisitingPlaces = ({navigation}) => {
   const openScreen = () => {
     navigation.navigate(navigationString.HOME);
   };
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    {label: 'Apple', value: 'apple'},
-    {label: 'Banana', value: 'banana'},
-  ]);
+  const worldData = store.getState().worldData;
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.mainStyles}>
           <SafeAreaView>
             <HeaderComp />
-            <DropDownPicker
-              open={open}
-              value={value}
-              items={items}
-              setOpen={setOpen}
-              setValue={setValue}
-              setItems={setItems}
+            <Dropdown
+              label="Select a Country"
+              items={worldData.map(country => ({
+                label: country.label,
+                value: country.value,
+              }))}
+              value={currentValue}
+              setValue={setCurrentValue}
+              placeholder="Countries"
+              style={{marginTop: isOpen ? 200 : 20}}
             />
           </SafeAreaView>
           <Text style={styles.textMain}>Visiting Places in the City</Text>

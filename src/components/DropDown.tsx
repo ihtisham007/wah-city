@@ -23,11 +23,9 @@ const Dropdown = ({
         value={value}
         setOpen={() => setIsOpen(!isOpen)}
         setValue={setValue}
-        maxHeight={height}
-        autoScroll
         placeholder={placeholder}
-        zIndex={9999}
         style={style}
+        autoScroll
       />
     </View>
   );

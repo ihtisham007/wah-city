@@ -5,8 +5,9 @@ const initialState = {
   count: 0,
   userInput: '',
   worldData: [],
-  state: [],
-  city: [],
+  country: ['pakistan'],
+  state: ['punjab'],
+  city: ['wah cantt'],
   valueID: '',
   type: '',
 };
@@ -30,7 +31,7 @@ function reducer(
       return {...state, userInput: action.payload};
     case 'none':
       return {...state, userInput: (state.userInput = 'hello world!!!')};
-    case 'SET_TYPE':
+    case 'SET_WORLD_DATA':
       return {...state, worldData: action.payload};
     default:
       return state;
