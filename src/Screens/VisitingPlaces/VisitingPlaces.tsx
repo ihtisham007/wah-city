@@ -28,10 +28,37 @@ const VisitingPlaces = ({navigation}) => {
   const [jsonData, setJsonData] = useState([]);
   const [visitingPlaces, setVisitingPlaces] = useState([]);
   const [currentValue, setCurrentValue] = useState('');
+  const [textInputValue, setTextInputValue] = useState('');
+
   const openScreen = (uidentifier: string) => {
     console.log(uidentifier);
     navigation.navigate(navigationString.HOME);
   };
+
+  const getContentLoad = () => {
+    let url = 'https://wahcity.com/api/v1/visitingplaces?page=1';
+    if (currentValue && !textInputValue && !dataID && !dataTYPE) {
+      url += `&catname=${currentValue}`;
+    } else if (currentValue && textInputValue && !dataID && !dataTYPE) {
+      url += `&catname=${currentValue}&place=${textInputValue}`;
+    } else if (currentValue && !textInputValue && dataID && dataTYPE) {
+      url += `&${dataTYPE}=${dataID}&catname=${currentValue}`;
+    } else if (currentValue && textInputValue && dataID && dataTYPE) {
+      url += `&${dataTYPE}=${dataID}&catname=${currentValue}&place=${textInputValue}`;
+    } else {
+      return; // Do nothing if the conditions are not met
+    }
+    console.log(url);
+    axios
+      .get(url)
+      .then(response => {
+        setVisitingPlaces(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   const dataID = store.getState().dataID;
   const dataTYPE = store.getState().dataTYPE;
 
@@ -65,7 +92,7 @@ const VisitingPlaces = ({navigation}) => {
               label="Select a Country"
               items={jsonData.map(category => ({
                 label: category.catname,
-                value: category.catid,
+                value: category.catname,
               }))}
               value={currentValue}
               setValue={setCurrentValue}
@@ -77,12 +104,11 @@ const VisitingPlaces = ({navigation}) => {
             <TextInput
               placeholder="Search"
               style={[styles.topViewInputField]}
+              onChangeText={text => setTextInputValue(text)}
             />
           </View>
           <View>
-            <View>
-              <ButtonComp btnText="Search" />
-            </View>
+            <ButtonComp btnText={'Search'} onPress={getContentLoad} />
           </View>
           <View style={styles.viewImage}>
             {visitingPlaces.map((ele, index: number) => {
