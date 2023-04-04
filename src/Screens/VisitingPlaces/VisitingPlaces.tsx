@@ -19,33 +19,53 @@ import axios from 'axios';
 import {moderateScale} from 'react-native-size-matters';
 import store from '../../store';
 import Dropdown from '../../components/DropDown';
+import ButtonComp from '../../components/ButtonComp';
 
-const archieveData = require('./../../archieve.json');
 // create a component
 const VisitingPlaces = ({navigation}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [bgColor, setBGColor] = useState('rgb(0,0,0)');
   const [jsonData, setJsonData] = useState([]);
+  const [visitingPlaces, setVisitingPlaces] = useState([]);
   const [currentValue, setCurrentValue] = useState('');
-  console.table(archieveData);
-  const changeColoronClick = () => {
-    setBGColor(colors.orange);
-  };
-  const openScreen = () => {
+  const openScreen = (uidentifier: string) => {
+    console.log(uidentifier);
     navigation.navigate(navigationString.HOME);
   };
-  const worldData = store.getState().worldData;
+  const dataID = store.getState().dataID;
+  const dataTYPE = store.getState().dataTYPE;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `https://wahcity.com/api/v1/visitingplacescategories?${dataTYPE}=${dataID}`,
+        );
+        setJsonData(response.data);
+        const VisitingPlaces = await axios.get(
+          `https://wahcity.com/api/v1/visitingplaces?page=1&${dataTYPE}=${dataID}`,
+        );
+        setVisitingPlaces(VisitingPlaces.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [dataID, dataTYPE]);
+
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.mainStyles}>
+          <Text>{dataID}</Text>
+          <Text>{dataTYPE}</Text>
           <SafeAreaView>
             <HeaderComp />
             <Dropdown
               label="Select a Country"
-              items={worldData.map(country => ({
-                label: country.label,
-                value: country.value,
+              items={jsonData.map(category => ({
+                label: category.catname,
+                value: category.catid,
               }))}
               value={currentValue}
               setValue={setCurrentValue}
@@ -53,7 +73,6 @@ const VisitingPlaces = ({navigation}) => {
               style={{marginTop: isOpen ? 200 : 20}}
             />
           </SafeAreaView>
-          <Text style={styles.textMain}>Visiting Places in the City</Text>
 
           <View style={styles.topViewInput}>
             <TextInput
@@ -61,35 +80,28 @@ const VisitingPlaces = ({navigation}) => {
               style={[styles.topViewInputField]}
             />
           </View>
-
-          <View style={styles.ViewRowDirection}>
-            <Text
-              style={[styles.textRowDirection, {color: bgColor}]}
-              onPress={changeColoronClick}>
-              All
-            </Text>
-            <Text style={styles.textRowDirection}>City History</Text>
-            <Text style={styles.textRowDirection}>Market</Text>
-          </View>
-          <View style={styles.ViewRowDirection}>
-            <Text style={styles.textRowDirection}>National Parks</Text>
-            <Text style={styles.textRowDirection}>
-              Other Tourist Attraction
-            </Text>
+          <View>
+            <View>
+              <ButtonComp btnText="Search" />
+            </View>
           </View>
           <View style={styles.viewImage}>
-            {archieveData.map((ele, index: number) => {
+            {visitingPlaces.map((ele, index: number) => {
               return (
-                <TouchableOpacity onPress={openScreen}>
+                <TouchableOpacity onPress={() => openScreen(ele.uidentifier)}>
                   <ImageBackground
-                    source={{uri: ele.pic}}
+                    source={{
+                      uri:
+                        'https://wahcity.com/images/visitingplaces/medium/' +
+                        ele.featureimage,
+                    }}
                     style={styles.viewImages}
                   />
                   <View
                     // eslint-disable-next-line react-native/no-inline-styles
                     style={styles.backImages}>
-                    <Text>{ele.name}</Text>
-                    <Text>{ele.uIdentifier}</Text>
+                    <Text>{ele.visitingplace}</Text>
+                    <Text>{ele.uidentifier}</Text>
                   </View>
                 </TouchableOpacity>
               );

@@ -27,11 +27,13 @@ const FirstStep = ({navigation}) => {
         );
         setCountries(countryItems);
         store.dispatch({type: 'SET_WORLD_DATA', payload: countryItems});
+        store.dispatch({type: 'SET_DATA_ID', payload: currentValue});
+        store.dispatch({type: 'SET_DATA_TYPE', payload: 'country'});
       })
       .catch(error => {
         console.error(error);
       });
-  }, []);
+  }, [currentValue]);
 
   useEffect(() => {
     fetch(`https://wahcity.com/api/v1/states/${currentValue}`)
@@ -43,9 +45,11 @@ const FirstStep = ({navigation}) => {
         }));
         setStates(stateItems);
         store.dispatch({type: 'SET_WORLD_DATA', payload: stateItems});
+        store.dispatch({type: 'SET_DATA_ID', payload: stateValue});
+        store.dispatch({type: 'SET_DATA_TYPE', payload: 'state'});
       })
       .catch(error => {});
-  }, [currentValue]);
+  }, [currentValue, stateValue]);
 
   useEffect(() => {
     fetch(`https://wahcity.com/api/v1/cities/${stateValue}`)
@@ -57,9 +61,11 @@ const FirstStep = ({navigation}) => {
         }));
         setCities(cityItems);
         store.dispatch({type: 'SET_WORLD_DATA', payload: cityItems});
+        store.dispatch({type: 'SET_DATA_ID', payload: cityValue});
+        store.dispatch({type: 'SET_DATA_TYPE', payload: 'city'});
       })
       .catch(error => {});
-  }, [stateValue]);
+  }, [stateValue, cityValue]);
 
   const handleSubmit = () => {
     navigation.navigate(navigationString.VISITING_PLACE);
