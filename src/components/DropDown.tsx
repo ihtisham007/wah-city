@@ -26,6 +26,7 @@ const Dropdown = ({
         placeholder={placeholder}
         style={style}
         autoScroll
+        containerStyle={{zIndex: 1}}
       />
     </View>
   );
@@ -34,6 +35,7 @@ const Dropdown = ({
 const styles = StyleSheet.create({
   container: {
     marginBottom: moderateScale(10),
+    zIndex: 1,
   },
   label: {
     fontWeight: 'bold',

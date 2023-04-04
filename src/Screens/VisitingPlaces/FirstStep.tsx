@@ -45,8 +45,13 @@ const FirstStep = ({navigation}) => {
         }));
         setStates(stateItems);
         store.dispatch({type: 'SET_WORLD_DATA', payload: stateItems});
-        store.dispatch({type: 'SET_DATA_ID', payload: stateValue});
-        store.dispatch({type: 'SET_DATA_TYPE', payload: 'state'});
+        if (currentValue.length === 0) {
+          store.dispatch({type: 'SET_DATA_ID', payload: stateValue});
+          store.dispatch({type: 'SET_DATA_TYPE', payload: 'state'});
+        } else {
+          store.dispatch({type: 'SET_DATA_ID', payload: currentValue});
+          store.dispatch({type: 'SET_DATA_TYPE', payload: 'country'});
+        }
       })
       .catch(error => {});
   }, [currentValue, stateValue]);

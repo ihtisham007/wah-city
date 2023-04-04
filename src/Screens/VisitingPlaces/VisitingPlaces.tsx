@@ -59,7 +59,7 @@ const VisitingPlaces = ({navigation}) => {
         <View style={styles.mainStyles}>
           <Text>{dataID}</Text>
           <Text>{dataTYPE}</Text>
-          <SafeAreaView>
+          <SafeAreaView style={{zIndex: 1}}>
             <HeaderComp />
             <Dropdown
               label="Select a Country"
@@ -70,7 +70,6 @@ const VisitingPlaces = ({navigation}) => {
               value={currentValue}
               setValue={setCurrentValue}
               placeholder="Countries"
-              style={{marginTop: isOpen ? 200 : 20}}
             />
           </SafeAreaView>
 
