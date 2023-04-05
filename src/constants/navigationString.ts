@@ -7,4 +7,5 @@ export default {
   CHOOSE_ACCOUNT: 'ChooseAccount',
   VISITING_PLACE: 'VisitingPlaces',
   FIRST_STEP: 'FirstStep',
+  SINGLE_VISITING_PLACES: 'SingleVisitingPlaces',
 };

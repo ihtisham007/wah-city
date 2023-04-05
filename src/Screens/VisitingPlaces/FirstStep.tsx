@@ -26,9 +26,6 @@ const FirstStep = ({navigation}) => {
           },
         );
         setCountries(countryItems);
-        store.dispatch({type: 'SET_WORLD_DATA', payload: countryItems});
-        store.dispatch({type: 'SET_DATA_ID', payload: currentValue});
-        store.dispatch({type: 'SET_DATA_TYPE', payload: 'country'});
       })
       .catch(error => {
         console.error(error);
@@ -44,14 +41,6 @@ const FirstStep = ({navigation}) => {
           value: state.stateid,
         }));
         setStates(stateItems);
-        store.dispatch({type: 'SET_WORLD_DATA', payload: stateItems});
-        if (currentValue.length === 0) {
-          store.dispatch({type: 'SET_DATA_ID', payload: stateValue});
-          store.dispatch({type: 'SET_DATA_TYPE', payload: 'state'});
-        } else {
-          store.dispatch({type: 'SET_DATA_ID', payload: currentValue});
-          store.dispatch({type: 'SET_DATA_TYPE', payload: 'country'});
-        }
       })
       .catch(error => {});
   }, [currentValue, stateValue]);
@@ -65,14 +54,25 @@ const FirstStep = ({navigation}) => {
           value: city.cityid,
         }));
         setCities(cityItems);
-        store.dispatch({type: 'SET_WORLD_DATA', payload: cityItems});
-        store.dispatch({type: 'SET_DATA_ID', payload: cityValue});
-        store.dispatch({type: 'SET_DATA_TYPE', payload: 'city'});
       })
       .catch(error => {});
   }, [stateValue, cityValue]);
 
   const handleSubmit = () => {
+    if (
+      currentValue.length > 0 &&
+      stateValue.length === 0 &&
+      cityValue.length === 0
+    ) {
+      store.dispatch({type: 'SET_DATA_ID', payload: currentValue});
+      store.dispatch({type: 'SET_DATA_TYPE', payload: 'country'});
+    } else if (stateValue.length > 0 && cityValue.length === 0) {
+      store.dispatch({type: 'SET_DATA_ID', payload: stateValue});
+      store.dispatch({type: 'SET_DATA_TYPE', payload: 'state'});
+    } else {
+      store.dispatch({type: 'SET_DATA_ID', payload: cityValue});
+      store.dispatch({type: 'SET_DATA_TYPE', payload: 'city'});
+    }
     navigation.navigate(navigationString.VISITING_PLACE);
   };
   const worldData = store.getState().worldData;
@@ -85,6 +85,9 @@ const FirstStep = ({navigation}) => {
         setValue={setCurrentValue}
         placeholder="Countries"
         style={{marginTop: isOpen ? 200 : 20}}
+        onChangeValueText={() => {
+          console.log(currentValue);
+        }}
       />
       <Dropdown
         label="Select a State"
@@ -93,6 +96,7 @@ const FirstStep = ({navigation}) => {
         setValue={setStateValue}
         placeholder="States"
         style={{marginTop: isOpen ? 175 : 20}}
+        onChangeValueText={() => {}}
       />
       <Dropdown
         label="Select a city"
@@ -101,6 +105,7 @@ const FirstStep = ({navigation}) => {
         setValue={setCityValue}
         placeholder="Cities"
         style={{marginTop: isOpen ? 100 : 20}}
+        onChangeValueText={() => {}}
       />
       <View>
         <ButtonComp

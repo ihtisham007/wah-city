@@ -32,7 +32,7 @@ const VisitingPlaces = ({navigation}) => {
 
   const openScreen = (uidentifier: string) => {
     console.log(uidentifier);
-    navigation.navigate(navigationString.HOME);
+    navigation.navigate(navigationString.SINGLE_VISITING_PLACES);
   };
 
   const getContentLoad = () => {
@@ -84,19 +84,17 @@ const VisitingPlaces = ({navigation}) => {
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.mainStyles}>
-          <Text>{dataID}</Text>
-          <Text>{dataTYPE}</Text>
           <SafeAreaView style={{zIndex: 1}}>
             <HeaderComp />
             <Dropdown
-              label="Select a Country"
+              label=""
               items={jsonData.map(category => ({
                 label: category.catname,
                 value: category.catname,
               }))}
               value={currentValue}
               setValue={setCurrentValue}
-              placeholder="Countries"
+              placeholder={dataTYPE.toUpperCase()}
             />
           </SafeAreaView>
 

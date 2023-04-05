@@ -11,6 +11,7 @@ const Dropdown = ({
   height,
   placeholder,
   style = {},
+  onChangeValueText = () => {},
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,6 +28,7 @@ const Dropdown = ({
         style={style}
         autoScroll
         containerStyle={{zIndex: 1}}
+        onChangeValue={onChangeValueText}
       />
     </View>
   );
