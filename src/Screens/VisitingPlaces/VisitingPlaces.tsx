@@ -31,7 +31,7 @@ const VisitingPlaces = ({navigation}) => {
   const [textInputValue, setTextInputValue] = useState('');
 
   const openScreen = (uidentifier: string) => {
-    console.log(uidentifier);
+    store.dispatch({type: 'SET_UINDENTIFIER', payload: uidentifier});
     navigation.navigate(navigationString.SINGLE_VISITING_PLACES);
   };
 

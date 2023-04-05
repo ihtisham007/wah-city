@@ -12,6 +12,7 @@ const initialState = {
   city: ['wah cantt'],
   valueID: '',
   type: '',
+  uidentifier: '',
 };
 
 export const setUserInput = (userText: String) => ({
@@ -39,6 +40,8 @@ function reducer(
       return {...state, dataID: action.payload};
     case 'SET_DATA_TYPE':
       return {...state, dataTYPE: action.payload};
+    case 'SET_UINDENTIFIER':
+      return {...state, uidentifier: action.payload};
     default:
       return state;
   }

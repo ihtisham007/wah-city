@@ -1,25 +1,78 @@
-//import liraries
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, FlatList, Image} from 'react-native';
+import store from '../../store';
+import {moderateScale} from 'react-native-size-matters';
 
-// create a component
 const SingleVisitingPlaces = () => {
+  const [visitingPlaces, setVisitingPlaces] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const getUidentifier = store.getState().uidentifier;
+        const response = await fetch(
+          `https://wahcity.com/api/v1/visitingplace/${getUidentifier}`,
+        );
+        const json = await response.json();
+        setVisitingPlaces(json);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const renderItem = ({item}) => (
+    <View style={styles.itemContainer}>
+      <Image
+        source={{
+          uri: 'https://wahcity.com/images/visitingplaces/medium/' + item.img,
+        }}
+        style={styles.itemImage}
+      />
+      <Text style={styles.itemTitle}>{item.heading}</Text>
+      <Text style={styles.itemDescription}>{item.shortdescription}</Text>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
-      <Text>SingleVisitingPlaces</Text>
+      <FlatList
+        data={visitingPlaces}
+        renderItem={renderItem}
+        keyExtractor={item => item.visitingplaceid}
+      />
     </View>
   );
 };
 
-// define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#fff',
     alignItems: 'center',
-    backgroundColor: '#2c3e50',
+    justifyContent: 'center',
+  },
+  itemContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: moderateScale(10),
+  },
+  itemImage: {
+    width: moderateScale(150),
+    height: moderateScale(150),
+    borderRadius: moderateScale(10),
+  },
+  itemTitle: {
+    fontSize: moderateScale(20),
+    fontWeight: 'bold',
+    marginVertical: moderateScale(5),
+  },
+  itemDescription: {
+    fontSize: moderateScale(16),
+    marginVertical: moderateScale(5),
   },
 });
 
-//make this component available to the app
 export default SingleVisitingPlaces;
