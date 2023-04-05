@@ -1,10 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, FlatList, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import store from '../../store';
 import {moderateScale} from 'react-native-size-matters';
 
 const SingleVisitingPlaces = () => {
   const [visitingPlaces, setVisitingPlaces] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,6 +23,7 @@ const SingleVisitingPlaces = () => {
         );
         const json = await response.json();
         setVisitingPlaces(json);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -34,6 +43,14 @@ const SingleVisitingPlaces = () => {
       <Text style={styles.itemDescription}>{item.shortdescription}</Text>
     </View>
   );
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -72,6 +89,11 @@ const styles = StyleSheet.create({
   itemDescription: {
     fontSize: moderateScale(16),
     marginVertical: moderateScale(5),
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

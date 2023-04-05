@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   ImageBackground,
+  ActivityIndicator,
 } from 'react-native';
 import HeaderComp from '../../components/HeaderComp';
 import imagePath from '../../constants/imagePath';
@@ -29,6 +30,7 @@ const VisitingPlaces = ({navigation}) => {
   const [visitingPlaces, setVisitingPlaces] = useState([]);
   const [currentValue, setCurrentValue] = useState('');
   const [textInputValue, setTextInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const openScreen = (uidentifier: string) => {
     store.dispatch({type: 'SET_UINDENTIFIER', payload: uidentifier});
@@ -36,6 +38,8 @@ const VisitingPlaces = ({navigation}) => {
   };
 
   const getContentLoad = () => {
+    setVisitingPlaces([]);
+    setIsLoading(true);
     let url = 'https://wahcity.com/api/v1/visitingplaces?page=1';
     if (currentValue && !textInputValue && !dataID && !dataTYPE) {
       url += `&catname=${currentValue}`;
@@ -53,6 +57,7 @@ const VisitingPlaces = ({navigation}) => {
       .get(url)
       .then(response => {
         setVisitingPlaces(response.data);
+        setIsLoading(false);
       })
       .catch(error => {
         console.error(error);
@@ -73,12 +78,21 @@ const VisitingPlaces = ({navigation}) => {
           `https://wahcity.com/api/v1/visitingplaces?page=1&${dataTYPE}=${dataID}`,
         );
         setVisitingPlaces(VisitingPlaces.data);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
   }, [dataID, dataTYPE]);
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
