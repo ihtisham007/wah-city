@@ -6,7 +6,10 @@ import {
   FlatList,
   Image,
   ActivityIndicator,
+  ImageBackground,
 } from 'react-native';
+import {WebView} from 'react-native-webview';
+
 import store from '../../store';
 import {moderateScale} from 'react-native-size-matters';
 
@@ -39,8 +42,16 @@ const SingleVisitingPlaces = () => {
         }}
         style={styles.itemImage}
       />
+      {/* {item.video.length > 0 && (
+        <WebView
+          style={styles.videoContainer}
+          allowsFullscreenVideo={true}
+          javaScriptEnabled={true}
+          source={{uri: 'https://www.youtube.com/watch?v=' + item.video}}
+        />
+      )} */}
       <Text style={styles.itemTitle}>{item.heading}</Text>
-      <Text style={styles.itemDescription}>{item.shortdescription}</Text>
+      <Text style={styles.itemDescription}>{item.textualcontent}</Text>
     </View>
   );
 
@@ -74,21 +85,32 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: moderateScale(10),
   },
   itemImage: {
-    width: moderateScale(150),
-    height: moderateScale(150),
+    width: '100%',
+    height: moderateScale(200),
     borderRadius: moderateScale(10),
   },
   itemTitle: {
     fontSize: moderateScale(20),
     fontWeight: 'bold',
     marginVertical: moderateScale(5),
+    width: '100%',
+    textAlign: 'center',
+    // borderBottomWidth: 2,
+    // borderBottomColor: 'black',
+    // flexWrap: 'wrap',
   },
   itemDescription: {
     fontSize: moderateScale(16),
     marginVertical: moderateScale(5),
+    textAlign: 'justify', // style the text properly
+    paddingHorizontal: moderateScale(10),
+  },
+  videoContainer: {
+    marginTop: moderateScale(10),
+    width: '100%',
+    height: moderateScale(200),
   },
   loadingContainer: {
     flex: 1,
