@@ -137,6 +137,7 @@ const VisitingPlaces = ({navigation}) => {
   };
 
   const loadMoreContent = () => {
+    console.log('more data');
     setPage(page + 1);
   };
 
@@ -187,33 +188,13 @@ const VisitingPlaces = ({navigation}) => {
             <ButtonComp btnText={'Search'} onPress={getContentLoad} />
           </View>
           <View style={styles.viewImage}>
-            {/* {visitingPlaces.map((ele, index: number) => {
-              return (
-                <TouchableOpacity onPress={() => openScreen(ele.uidentifier)}>
-                  <ImageBackground
-                    source={{
-                      uri:
-                        'https://wahcity.com/images/visitingplaces/medium/' +
-                        ele.featureimage,
-                    }}
-                    style={styles.viewImages}
-                  />
-                  <View
-                    // eslint-disable-next-line react-native/no-inline-styles
-                    style={styles.backImages}>
-                    <Text>{ele.visitingplace}</Text>
-                    <Text>{ele.uidentifier}</Text>
-                  </View>
-                </TouchableOpacity>
-              );
-            })} */}
             <FlatList
               data={visitingPlaces}
               keyExtractor={(item, index) => index.toString()}
               renderItem={renderItem}
-              ListFooterComponent={renderLoader}
               onEndReached={loadMoreContent}
-              onEndReachedThreshold={0}
+              onEndReachedThreshold={0.1}
+              ListFooterComponent={renderLoader}
             />
           </View>
         </View>
