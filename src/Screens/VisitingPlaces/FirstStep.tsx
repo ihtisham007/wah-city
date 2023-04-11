@@ -84,19 +84,20 @@ const FirstStep = ({navigation}) => {
         value={currentValue}
         setValue={setCurrentValue}
         placeholder="Countries"
-        style={{marginTop: isOpen ? 200 : 20}}
         onChangeValueText={() => {
           console.log(currentValue);
         }}
+        style={{zIndex: 1}}
       />
+
       <Dropdown
         label="Select a State"
         items={states}
         value={stateValue}
         setValue={setStateValue}
         placeholder="States"
-        style={{marginTop: isOpen ? 175 : 20}}
         onChangeValueText={() => {}}
+        style={{zIndex: 0}}
       />
       <Dropdown
         label="Select a city"
@@ -104,7 +105,6 @@ const FirstStep = ({navigation}) => {
         value={cityValue}
         setValue={setCityValue}
         placeholder="Cities"
-        style={{marginTop: isOpen ? 100 : 20}}
         onChangeValueText={() => {}}
       />
       <View>
@@ -131,6 +131,10 @@ const styles = StyleSheet.create({
   btnGo: {
     paddingVertical: moderateScale(10),
     paddingHorizontal: moderateScale(20),
+  },
+  dropdownContainer: {
+    zIndex: 1,
+    marginTop: moderateScale(10),
   },
 });
 

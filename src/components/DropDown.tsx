@@ -16,7 +16,7 @@ const Dropdown = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <View>
       <Text style={styles.label}>{label}</Text>
       <DropDownPicker
         items={items}
@@ -27,7 +27,6 @@ const Dropdown = ({
         placeholder={placeholder}
         style={style}
         autoScroll
-        containerStyle={{zIndex: 1}}
         onChangeValue={onChangeValueText}
       />
     </View>
@@ -35,10 +34,6 @@ const Dropdown = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: moderateScale(10),
-    zIndex: 1,
-  },
   label: {
     fontWeight: 'bold',
     marginBottom: moderateScale(5),

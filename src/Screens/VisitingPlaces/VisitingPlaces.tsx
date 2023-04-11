@@ -35,6 +35,7 @@ const VisitingPlaces = ({navigation}) => {
   const [contentLoading, setContentLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [urlForPagination, setURlForPagination] = useState('');
+  let setURL = '';
 
   const openScreen = (uidentifier: string) => {
     store.dispatch({type: 'SET_UINDENTIFIER', payload: uidentifier});
@@ -82,7 +83,7 @@ const VisitingPlaces = ({navigation}) => {
         console.log(setURlForPagination);
         setContentLoading(true);
         const VisitingPlacesResponse = await axios.get(
-          `https://wahcity.com/api/v1/visitingplaces?page=${page}${urlForPagination}`,
+          `https://wahcity.com/api/v1/visitingplaces?page=${page}${setURL}`,
         );
         setContentLoading(false);
         setVisitingPlaces([...visitingPlaces, ...VisitingPlacesResponse.data]);
@@ -108,7 +109,8 @@ const VisitingPlaces = ({navigation}) => {
         );
         setVisitingPlaces(VisitingPlaces.data);
         setIsLoading(false);
-        setURlForPagination(`&${dataTYPE}=${dataID}`);
+        //setURlForPagination(`&${dataTYPE}=${dataID}`);
+        setURL = `&${dataTYPE}=${dataID}`;
       } catch (error) {
         console.error(error);
       }
@@ -193,7 +195,7 @@ const VisitingPlaces = ({navigation}) => {
               keyExtractor={(item, index) => index.toString()}
               renderItem={renderItem}
               onEndReached={loadMoreContent}
-              onEndReachedThreshold={0.1}
+              onEndReachedThreshold={0.5}
               ListFooterComponent={renderLoader}
             />
           </View>
