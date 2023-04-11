@@ -35,7 +35,6 @@ const VisitingPlaces = ({navigation}) => {
   const [contentLoading, setContentLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [urlForPagination, setURlForPagination] = useState('');
-  let setURL = '';
 
   const openScreen = (uidentifier: string) => {
     store.dispatch({type: 'SET_UINDENTIFIER', payload: uidentifier});
@@ -77,22 +76,22 @@ const VisitingPlaces = ({navigation}) => {
       });
   };
 
-  useEffect(() => {
-    const fetchPaginationData = async () => {
-      try {
-        console.log(setURlForPagination);
-        setContentLoading(true);
-        const VisitingPlacesResponse = await axios.get(
-          `https://wahcity.com/api/v1/visitingplaces?page=${page}${setURL}`,
-        );
-        setContentLoading(false);
-        setVisitingPlaces([...visitingPlaces, ...VisitingPlacesResponse.data]);
-      } catch (error) {
-        console.log('error');
-      }
-    };
-    fetchPaginationData();
-  }, [page]);
+  // useEffect(() => {
+  //   const fetchPaginationData = async () => {
+  //     try {
+  //       console.log(setURlForPagination);
+  //       setContentLoading(true);
+  //       const VisitingPlacesResponse = await axios.get(
+  //         `https://wahcity.com/api/v1/visitingplaces?page=${page}${urlForPagination}`,
+  //       );
+  //       setContentLoading(false);
+  //       setVisitingPlaces([...visitingPlaces, ...VisitingPlacesResponse.data]);
+  //     } catch (error) {
+  //       console.log('error');
+  //     }
+  //   };
+  //   fetchPaginationData();
+  // }, [page]);
 
   const dataID = store.getState().dataID;
   const dataTYPE = store.getState().dataTYPE;
@@ -109,8 +108,8 @@ const VisitingPlaces = ({navigation}) => {
         );
         setVisitingPlaces(VisitingPlaces.data);
         setIsLoading(false);
-        //setURlForPagination(`&${dataTYPE}=${dataID}`);
-        setURL = `&${dataTYPE}=${dataID}`;
+        setURlForPagination(`&${dataTYPE}=${dataID}`);
+        //setURL = `&${dataTYPE}=${dataID}`;
       } catch (error) {
         console.error(error);
       }

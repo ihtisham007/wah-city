@@ -16,7 +16,7 @@ const Dropdown = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <View>
+    <View style={{}}>
       <Text style={styles.label}>{label}</Text>
       <DropDownPicker
         items={items}
@@ -25,7 +25,7 @@ const Dropdown = ({
         setOpen={() => setIsOpen(!isOpen)}
         setValue={setValue}
         placeholder={placeholder}
-        style={style}
+        style={{marginTop: isOpen ? 172 : 30}}
         autoScroll
         onChangeValue={onChangeValueText}
       />

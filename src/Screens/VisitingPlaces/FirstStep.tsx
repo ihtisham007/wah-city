@@ -87,7 +87,6 @@ const FirstStep = ({navigation}) => {
         onChangeValueText={() => {
           console.log(currentValue);
         }}
-        style={{zIndex: 1}}
       />
 
       <Dropdown
@@ -97,7 +96,6 @@ const FirstStep = ({navigation}) => {
         setValue={setStateValue}
         placeholder="States"
         onChangeValueText={() => {}}
-        style={{zIndex: 0}}
       />
       <Dropdown
         label="Select a city"
