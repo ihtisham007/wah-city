@@ -87,6 +87,7 @@ const VisitingPlaces = ({navigation}) => {
         setContentLoading(false);
         setVisitingPlaces([...visitingPlaces, ...VisitingPlacesResponse.data]);
       } catch (error) {
+        setContentLoading(false);
         console.log('error');
       }
     };

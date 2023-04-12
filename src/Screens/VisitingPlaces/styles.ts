@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   mainStyles: {
     paddingHorizontal: moderateScale(10),
     paddingTop: moderateScale(10),
+    marginBottom: moderateScale(30),
   },
   textMain: {
     textAlign: 'center',
