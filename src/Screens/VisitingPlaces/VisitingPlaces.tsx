@@ -117,13 +117,13 @@ const VisitingPlaces = ({navigation}) => {
     fetchData();
   }, [dataID, dataTYPE]);
 
-  if (isLoading) {
-    return isLoading ? (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#0000ff" />
-      </View>
-    ) : null;
-  }
+  // if (isLoading) {
+  //   return isLoading ? (
+  //     <View style={styles.loadingContainer}>
+  //       <ActivityIndicator size="large" color="#0000ff" />
+  //     </View>
+  //   ) : null;
+  // }
 
   const renderLoader = () => {
     return (
@@ -162,22 +162,19 @@ const VisitingPlaces = ({navigation}) => {
   };
   return (
     <View style={styles.container}>
+      <HeaderComp />
       <ScrollView>
         <View style={styles.mainStyles}>
-          <SafeAreaView style={{zIndex: 1}}>
-            <HeaderComp />
-            <Dropdown
-              label=""
-              items={jsonData.map(category => ({
-                label: category.catname,
-                value: category.catname,
-              }))}
-              value={currentValue}
-              setValue={setCurrentValue}
-              placeholder={dataTYPE.toUpperCase()}
-            />
-          </SafeAreaView>
-
+          <Dropdown
+            label=""
+            items={jsonData.map(category => ({
+              label: category.catname,
+              value: category.catname,
+            }))}
+            value={currentValue}
+            setValue={setCurrentValue}
+            placeholder={dataTYPE.toUpperCase()}
+          />
           <View style={styles.topViewInput}>
             <TextInput
               placeholder="Search"
