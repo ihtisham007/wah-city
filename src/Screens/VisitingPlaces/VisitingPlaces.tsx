@@ -160,45 +160,79 @@ const VisitingPlaces = ({navigation}) => {
       </TouchableOpacity>
     );
   };
+
   return (
+    // <View style={styles.container}>
+    //   <HeaderComp />
+    //   <ScrollView>
+    //     <View style={styles.mainStyles}>
+    //       <Dropdown
+    //         label=""
+    //         items={jsonData.map(category => ({
+    //           label: category.catname,
+    //           value: category.catname,
+    //         }))}
+    //         value={currentValue}
+    //         setValue={setCurrentValue}
+    //         placeholder={dataTYPE.toUpperCase()}
+    //       />
+    //       <View style={styles.topViewInput}>
+    //         <TextInput
+    //           placeholder="Search"
+    //           style={[styles.topViewInputField]}
+    //           onChangeText={text => setTextInputValue(text)}
+    //         />
+    //       </View>
+    //       <View>
+    //         <ButtonComp btnText={'Search'} onPress={getContentLoad} />
+    //       </View>
+    //     </View>
+    //   </ScrollView>
+    //   <View style={styles.viewImage}>
+    //     <FlatList
+    //       data={visitingPlaces}
+    //       keyExtractor={(item, index) => index.toString()}
+    //       renderItem={renderItem}
+    //       onEndReached={loadMoreContent}
+    //       onEndReachedThreshold={0.5}
+    //       ListFooterComponent={renderLoader}
+    //     />
+    //   </View>
+    // </View>
     <View style={styles.container}>
       <HeaderComp />
-      {/* <ScrollView> */}
-      <View style={styles.mainStyles}>
-        <Dropdown
-          label=""
-          items={jsonData.map(category => ({
-            label: category.catname,
-            value: category.catname,
-          }))}
-          value={currentValue}
-          setValue={setCurrentValue}
-          placeholder={dataTYPE.toUpperCase()}
-        />
-        <View style={styles.topViewInput}>
-          <TextInput
-            placeholder="Search"
-            style={[styles.topViewInputField]}
-            onChangeText={text => setTextInputValue(text)}
-          />
-        </View>
-        <View>
-          <ButtonComp btnText={'Search'} onPress={getContentLoad} />
-        </View>
-        <FlatList
-          data={visitingPlaces}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={renderItem}
-          onEndReached={loadMoreContent}
-          onEndReachedThreshold={0.5}
-          ListFooterComponent={renderLoader}
-        />
-      </View>
-
-      {/* </ScrollView> */}
-      {/* <View style={styles.viewImage}> */}
-
-      {/* </View> */}
+      <FlatList
+        data={visitingPlaces}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={renderItem}
+        onEndReached={loadMoreContent}
+        onEndReachedThreshold={0.5}
+        ListHeaderComponent={
+          <View style={styles.mainStyles}>
+            <Dropdown
+              label=""
+              items={jsonData.map(category => ({
+                label: category.catname,
+                value: category.catname,
+              }))}
+              value={currentValue}
+              setValue={setCurrentValue}
+              placeholder={dataTYPE.toUpperCase()}
+            />
+            <View style={styles.topViewInput}>
+              <TextInput
+                placeholder="Search"
+                style={[styles.topViewInputField]}
+                onChangeText={text => setTextInputValue(text)}
+              />
+            </View>
+            <View>
+              <ButtonComp btnText={'Search'} onPress={getContentLoad} />
+            </View>
+          </View>
+        }
+        ListFooterComponent={renderLoader}
+      />
     </View>
   );
 };
