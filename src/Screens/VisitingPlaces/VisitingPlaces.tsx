@@ -76,22 +76,22 @@ const VisitingPlaces = ({navigation}) => {
       });
   };
 
-  // useEffect(() => {
-  //   const fetchPaginationData = async () => {
-  //     try {
-  //       console.log(setURlForPagination);
-  //       setContentLoading(true);
-  //       const VisitingPlacesResponse = await axios.get(
-  //         `https://wahcity.com/api/v1/visitingplaces?page=${page}${urlForPagination}`,
-  //       );
-  //       setContentLoading(false);
-  //       setVisitingPlaces([...visitingPlaces, ...VisitingPlacesResponse.data]);
-  //     } catch (error) {
-  //       console.log('error');
-  //     }
-  //   };
-  //   fetchPaginationData();
-  // }, [page]);
+  useEffect(() => {
+    const fetchPaginationData = async () => {
+      try {
+        console.log(setURlForPagination);
+        setContentLoading(true);
+        const VisitingPlacesResponse = await axios.get(
+          `https://wahcity.com/api/v1/visitingplaces?page=${page}${urlForPagination}`,
+        );
+        setContentLoading(false);
+        setVisitingPlaces([...visitingPlaces, ...VisitingPlacesResponse.data]);
+      } catch (error) {
+        console.log('error');
+      }
+    };
+    fetchPaginationData();
+  }, [page]);
 
   const dataID = store.getState().dataID;
   const dataTYPE = store.getState().dataTYPE;
@@ -163,40 +163,42 @@ const VisitingPlaces = ({navigation}) => {
   return (
     <View style={styles.container}>
       <HeaderComp />
-      <ScrollView>
-        <View style={styles.mainStyles}>
-          <Dropdown
-            label=""
-            items={jsonData.map(category => ({
-              label: category.catname,
-              value: category.catname,
-            }))}
-            value={currentValue}
-            setValue={setCurrentValue}
-            placeholder={dataTYPE.toUpperCase()}
+      {/* <ScrollView> */}
+      <View style={styles.mainStyles}>
+        <Dropdown
+          label=""
+          items={jsonData.map(category => ({
+            label: category.catname,
+            value: category.catname,
+          }))}
+          value={currentValue}
+          setValue={setCurrentValue}
+          placeholder={dataTYPE.toUpperCase()}
+        />
+        <View style={styles.topViewInput}>
+          <TextInput
+            placeholder="Search"
+            style={[styles.topViewInputField]}
+            onChangeText={text => setTextInputValue(text)}
           />
-          <View style={styles.topViewInput}>
-            <TextInput
-              placeholder="Search"
-              style={[styles.topViewInputField]}
-              onChangeText={text => setTextInputValue(text)}
-            />
-          </View>
-          <View>
-            <ButtonComp btnText={'Search'} onPress={getContentLoad} />
-          </View>
-          <View style={styles.viewImage}>
-            <FlatList
-              data={visitingPlaces}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={renderItem}
-              onEndReached={loadMoreContent}
-              onEndReachedThreshold={0.5}
-              ListFooterComponent={renderLoader}
-            />
-          </View>
         </View>
-      </ScrollView>
+        <View>
+          <ButtonComp btnText={'Search'} onPress={getContentLoad} />
+        </View>
+        <FlatList
+          data={visitingPlaces}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={renderItem}
+          onEndReached={loadMoreContent}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={renderLoader}
+        />
+      </View>
+
+      {/* </ScrollView> */}
+      {/* <View style={styles.viewImage}> */}
+
+      {/* </View> */}
     </View>
   );
 };
