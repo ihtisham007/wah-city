@@ -105,9 +105,9 @@ const FirstStep = ({navigation}) => {
         placeholder="Cities"
         onChangeValueText={() => {}}
       />
-      <View>
+      <View style={{margin: moderateScale(20)}}>
         <ButtonComp
-          btnText="Submit"
+          btnText="Submitt"
           buttonStyles={styles.btnGo}
           onPress={handleSubmit}
         />

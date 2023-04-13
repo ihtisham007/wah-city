@@ -48,11 +48,11 @@ const Login = ({navigation}) => {
           <TouchableOpacity activeOpacity={0.7} style={styles.forgotView}>
             <Text style={styles.forgotText}>Forgot Password</Text>
           </TouchableOpacity>
-          <ButtonComp btnText={'Login'} />
+          <ButtonComp btnText={'Login'} onPress={openSignUpPage} />
         </View>
         <View style={styles.bottomView}>
           <Text style={{color: 'red'}}>Not a member ?</Text>
-          <TouchableOpacity onPress={openSignUpPage}>
+          <TouchableOpacity>
             <Text>Join now</Text>
           </TouchableOpacity>
         </View>
