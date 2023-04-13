@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: moderateScale(42),
     paddingLeft: moderateScale(10),
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    backgroundColor: '#f7f7f7',
   },
   textLogo: {
     fontSize: moderateScale(20),

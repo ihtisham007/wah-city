@@ -61,6 +61,7 @@ const VisitingPlaces = ({navigation}) => {
   };
 
   const getContentLoad = () => {
+    console.log('click');
     setVisitingPlaces([]);
     setContentLoading(true);
     const url = getUrl();
@@ -79,7 +80,6 @@ const VisitingPlaces = ({navigation}) => {
   useEffect(() => {
     const fetchPaginationData = async () => {
       try {
-        console.log('setURlForPagination');
         setContentLoading(true);
         const VisitingPlacesResponse = await axios.get(
           `https://wahcity.com/api/v1/visitingplaces?page=${page}${urlForPagination}`,
@@ -185,9 +185,7 @@ const VisitingPlaces = ({navigation}) => {
                 onChangeText={text => setTextInputValue(text)}
               />
             </View>
-            <View>
-              <ButtonComp btnText={'Search'} onPress={getContentLoad} />
-            </View>
+            <ButtonComp btnText={'Searchh'} onPress={getContentLoad} />
           </View>
         }
         ListFooterComponent={renderLoader}
