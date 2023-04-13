@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: moderateScale(42),
+    paddingLeft: moderateScale(10),
   },
   textLogo: {
     fontSize: moderateScale(20),

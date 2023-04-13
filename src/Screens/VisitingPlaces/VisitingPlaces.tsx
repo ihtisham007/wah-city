@@ -79,15 +79,19 @@ const VisitingPlaces = ({navigation}) => {
   useEffect(() => {
     const fetchPaginationData = async () => {
       try {
-        console.log(setURlForPagination);
+        console.log('setURlForPagination');
         setContentLoading(true);
         const VisitingPlacesResponse = await axios.get(
           `https://wahcity.com/api/v1/visitingplaces?page=${page}${urlForPagination}`,
         );
+        if (VisitingPlacesResponse.data.length > 0) {
+          setVisitingPlaces([
+            ...visitingPlaces,
+            ...VisitingPlacesResponse.data,
+          ]);
+        }
         setContentLoading(false);
-        setVisitingPlaces([...visitingPlaces, ...VisitingPlacesResponse.data]);
       } catch (error) {
-        setContentLoading(false);
         console.log('error');
       }
     };
@@ -110,7 +114,6 @@ const VisitingPlaces = ({navigation}) => {
         setVisitingPlaces(VisitingPlaces.data);
         setIsLoading(false);
         setURlForPagination(`&${dataTYPE}=${dataID}`);
-        //setURL = `&${dataTYPE}=${dataID}`;
       } catch (error) {
         console.error(error);
       }
@@ -118,16 +121,8 @@ const VisitingPlaces = ({navigation}) => {
     fetchData();
   }, [dataID, dataTYPE]);
 
-  // if (isLoading) {
-  //   return isLoading ? (
-  //     <View style={styles.loadingContainer}>
-  //       <ActivityIndicator size="large" color="#0000ff" />
-  //     </View>
-  //   ) : null;
-  // }
-
   const renderLoader = () => {
-    return (
+    return contentLoading ? (
       <View
         style={{
           marginVertical: moderateVerticalScale(16),
@@ -135,7 +130,7 @@ const VisitingPlaces = ({navigation}) => {
         }}>
         <ActivityIndicator size={'large'} color="#aaa" />
       </View>
-    );
+    ) : null;
   };
 
   const loadMoreContent = () => {
@@ -146,7 +141,7 @@ const VisitingPlaces = ({navigation}) => {
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity onPress={() => openScreen(item.uidentifier)}>
-        <ImageBackground
+        <Image
           source={{
             uri:
               'https://wahcity.com/images/visitingplaces/medium/' +
@@ -163,43 +158,6 @@ const VisitingPlaces = ({navigation}) => {
   };
 
   return (
-    // <View style={styles.container}>
-    //   <HeaderComp />
-    //   <ScrollView>
-    //     <View style={styles.mainStyles}>
-    //       <Dropdown
-    //         label=""
-    //         items={jsonData.map(category => ({
-    //           label: category.catname,
-    //           value: category.catname,
-    //         }))}
-    //         value={currentValue}
-    //         setValue={setCurrentValue}
-    //         placeholder={dataTYPE.toUpperCase()}
-    //       />
-    //       <View style={styles.topViewInput}>
-    //         <TextInput
-    //           placeholder="Search"
-    //           style={[styles.topViewInputField]}
-    //           onChangeText={text => setTextInputValue(text)}
-    //         />
-    //       </View>
-    //       <View>
-    //         <ButtonComp btnText={'Search'} onPress={getContentLoad} />
-    //       </View>
-    //     </View>
-    //   </ScrollView>
-    //   <View style={styles.viewImage}>
-    //     <FlatList
-    //       data={visitingPlaces}
-    //       keyExtractor={(item, index) => index.toString()}
-    //       renderItem={renderItem}
-    //       onEndReached={loadMoreContent}
-    //       onEndReachedThreshold={0.5}
-    //       ListFooterComponent={renderLoader}
-    //     />
-    //   </View>
-    // </View>
     <View style={styles.container}>
       <HeaderComp />
       <FlatList
