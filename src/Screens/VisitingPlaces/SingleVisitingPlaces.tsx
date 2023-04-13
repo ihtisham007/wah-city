@@ -103,9 +103,12 @@ const styles = StyleSheet.create({
   },
   itemDescription: {
     fontSize: moderateScale(16),
+    lineHeight: moderateScale(24),
     marginVertical: moderateScale(5),
-    textAlign: 'justify', // style the text properly
+    textAlign: 'center',
     paddingHorizontal: moderateScale(10),
+    fontFamily: 'OpenSans-Regular', // assuming you have this font imported
+    color: '#333', // dark gray text color
   },
   videoContainer: {
     marginTop: moderateScale(10),
